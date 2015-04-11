@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script>
+
+            $(document).ready(function() {
+                var i;
+                $.ajax({
+                    type: 'GET',
+                    url: 'rs/book/list',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    success: function(data) {
+                        alert(data[0].toString());
+                        console.log(data);
+                        $.each(data, function(index, item) {
+                            alert(item.name);
+                            $("#name").append("<td>" + item.name + "</td>");
+                        });
+                    }
+                });
+
+            });
+        </script>
+    </head>
+    <body>
+        <div>
+            <table border="1">
+                <tr>
+                    <th>Name</th>
+                    <th>Book Code</th>
+                    <th>Author</th>
+                    <th>Arrival Date</th>
+                    <th>Quantity</th>
+                    <th>Location</th>
+                </tr>
+                <tr> 
+                    <td id="name"><td>
+                    <td id="bookcode"><td>
+                    <td id="author"><td> 
+                    <td id="author"><td>     
+                </tr>
+            </table>
+
+        </div>     
+    </body>
+</html>
