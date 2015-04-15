@@ -12,81 +12,144 @@
         <script src="jquery/jquery.bxslider.js"></script>
         <!-- bxSlider CSS file --> 
         <link href="jquery/jquery.bxslider.css" rel="stylesheet" />
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">-->
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+        <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
         <script>
 
-            $(window).load(function () {
+            $(window).load(function() {
 
-                $('.bxslider').bxSlider({
-                    auto: true,
-                    autoControls: true,
-                    slideWidth: 1000
-                });
 
-                $("#sessionData").dialog({
-                    autoOpen: true,
+                var num = 0;
+
+                $openit = $("#sessionData").dialog({
+                    autoOpen: false,
                     height: 500,
                     width: 700,
                     modal: true,
                     draggable: false,
                     show: "slide",
-                    runEffect:"pulsate"
+                    runEffect: "pulsate"
                 });
+
+
+
+
+                $openit.dialog("open");
+
+
                 $.ajax({
                     type: "GET",
                     url: 'http://localhost:8080/librarymanagementsystem/ShowSession',
-                    success: function (data) {
-                      $("#sessionData").html(data);
+                    success: function(data) {
+                        if (num === 0)
+                        {
+                            $("#sessionData").html(data);
+                            num = 1;
+                        }
                     }
 
                 });
-                
-               return true;
+
+
+                $('.bxslider').bxSlider({
+                    auto: true,
+                    autoControls: true,
+                    slideWidth: 760
+                });
             });
 
         </script>
         <style>
             body{
-                background: -webkit-linear-gradient(top, rgba(30,87,153,1) 0%,rgba(125,185,232,0) 100%);
+                width: 800px;
+                margin-left: auto;
+                margin-right: auto;
+                margin-bottom:0;  
+                margin-top:0;
+
+                border-left: 2px solid black; 
+                border-right: 2px solid black;
+            }
+            header{
+                //border:2px solid black;
             }
             #list{
+                border-top: 2px solid black; 
+                border-bottom:  2px solid black;
                 list-style-type:none;
-                text-align:center;
-                border:2px solid black;
-                background:linear-gradient(to right, rgba(183,222,237,1) 0%, rgba(113,206,239,1) 50%, rgba(33,180,226,1) 51%, rgba(183,222,237,1) 100%);padding-top:1em;
+                
+                background-image :linear-gradient(to right, rgba(183,222,237,1) 0%, rgba(113,206,239,1) 50%, rgba(33,180,226,1) 51%, rgba(183,222,237,1) 100%);padding-top:1em;
                 padding-bottom:1em;
             }
             li{
-                margin-left:1em;
+               
+                padding-left: 1em;
                 display:inline;
-                font-size:150%;
+                margin-right: 0em;
+
+            }
+            li a{
+                color: black;
+                font-weight: bold;
+            }
+            h3 {
+             
+                margin-left:0.5em; 
+            }
+            /*footer, decrease the size of the font*/
+            footer {
+                margin-top: 1em; 
+                border-bottom: 2px solid black; 
+                border-top: 2px solid black;
+                background-image: -moz-linear-gradient(45deg,black ,blue 75%,white 100%);
+               background-image :linear-gradient(to right, rgba(183,222,237,1) 0%, rgba(113,206,239,1) 50%, rgba(33,180,226,1) 51%, rgba(183,222,237,1) 100%);padding-top:1em;
+                 background-color:#0040FF; 
+                
+            }
+            footer p { font-size: 100%; text-align:center;font-weight: bold;}
+            
+            #intro{
+                margin: 0.5em;
             }
         </style>
-        
+
     </head>
     <body>
-        <h1 align="center">Welcome to Library Management System</h1>
-        <nav>
-            <ul id="list">
-                <li> <a href="AddMember.html">Members</a></li>
-                <li> <a href="AddMember.html">Add Member</a></li>
-                <li> <a href="BookList.html">Books List</a></li>
-                <li><a href="AddBook.html">Add Books</a></li>
-                <li> <a href="BorrowBook.html">Borrow Book</a></li>
-                <li> <a href="ReturnBook.html">Return Book</a></li>
-                <li>  <a href="Logout.html">Logout</a></li>
-            </ul>
-        </nav>
+        <header>
+            <img src="images/DigitalLibrary_banner.jpg" width="800" height="150" alt="icon">
+            <nav>
+                <ul id="list">
+                    <li> <a href="welcome.html">Home</a></li>
+                    <li> <a href="AddMember.html">Add Member</a></li>
+                    <li> <a href="BookList.html">Books List</a></li>
+                    <li><a href="AddBook.html">Add Books</a></li>
+                    <li> <a href="BorrowBook.html">Borrow Book</a></li>
+                    <li> <a href="ReturnBook.html">Return Book</a></li>
+                    <li>  <a href="Logout.html">Logout</a></li>
+                </ul>
+            </nav>
+        </header>
         <section>
-            <br><br>
+           <p id="intro"> The University of Singh at Nai Basti-Champaign is the proud home of one of the largest and 
+            richest public research library collections in North America. Our 24 million items, the vast 
+            majority of which are paper and book-based, include Medieval manuscripts, large collections 
+            of incunabula and early printed books, literary manuscripts, maps and atlases, prints, and all
+            sizes and types of printed books and other paper objects. The University Library is committed to
+            sustaining and enhancing its capacity to treat and protect its important paper-based collections,
+            with the majority of conservation and preservation-related investments focused on the care of its
+            rare, unique, and otherwise valuable objects. 
+           </p>
+            <h3>Current Programs..</h3>
+
             <ul class="bxslider">
                 <li><img src="jquery/images/image.jpg" alt="pic1" /></li>
                 <li><img src="jquery/images/pic2.png" alt="pic2"/></li>
                 <li><img src="jquery/images/pic3.png" alt="pic3"/></li>
             </ul>
         </section>
-        <div id="sessionData" style="box-shadow: 55px 50px 500px black;" >
-           
-        </div>
+        <div id="sessionData" style="box-shadow: 55px 50px 500px black;" ></div>
+        <footer>
+            <p> &copy; 2015 Kuldeep singh</p>
+        </footer>
     </body>
 </html>
