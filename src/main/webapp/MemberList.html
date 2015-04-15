@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <link rel="stylesheet" href="/resources/demos/style.css">
+
+        <!-- <script src="http://code.jquery.com/jquery.min.js"></script>-->
+        <script>
+
+            $(document).ready(function() {
+                var i;
+
+                function getalldata() {
+
+
+                    $.ajax({
+                        type: 'GET',
+                        url: 'rs/member',
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        success: function(data) {
+
+                            console.log(data);
+                            $.each(data, function(index, item) {
+
+                                //var data=item.name;
+                                $("#table").append("<tr id=delete" + item.id + "><td>" + item.name + "</td>"
+                                        + "<td>" + item.address + "</td>"
+                                        + "<td>" + item.issuedate + "</td>"
+                                        + "<td>" + item.deadlinedate + "</td>"
+                                        + "<td>" + item.amount + "</td>"
+                                        + "<td><input type='button' class='deleteBook' id=" + item.id + " value='Delete'>" + item.id + ""
+                                        + "<input type='button' class='updateBook' id=" + item.id + " value='Update'>" + item.id + "</td></tr>"
+                                        );
+                                /*   $("#bookcode").append("<td>" + item.bookcode + "</td>");
+                                 $("#author").append("<td>" + item.author+ "</td>");
+                                 $("#quantity").append("<td>" + item.quantity + "</td>");
+                                 $("#arrivaldate").append("<td>" + item.arrivaldate+ "</td>");
+                                 $("#location_rack").append("<td>" + item.location_rack + "</td></tr>");
+                                 $("#delete").append("<tr><td><input type='button' class='deleteBook' id="+item.id+" value='delete'>"+item.id+"</td></tr>");
+                                 */
+                            });
+                        }
+                    });
+                }
+                getalldata();
+                $("#table").on("click", ".deleteBook", function() {
+                    var id = $(this).attr('id');
+                    alert(id);
+                    $.ajax({
+                        type: 'DELETE',
+                        url: 'rs/member/' + id + '',
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        success: function(data) {
+
+                            // window.location.reload();
+                            // $("#refrese").load(document.URL + " #refrese");
+                            //getalldata();
+
+                            $("#delete" + id).remove();
+
+                        }
+                    });
+
+                });
+
+                //call dialog box
+
+                $("#table").on("click", ".updateBook", function() {
+                    alert("g jfn");
+                    var id = $(this).attr('id');
+                    $("#dialogForm").dialog({
+                        autoOpen: true,
+                        height: 610,
+                        width: 350,
+                        modal: true,
+                        show: 'slide',
+                        open: function() {
+                            $.ajax({
+                                type: 'GET',
+                                url: 'rs/member/' + id + '',
+                                dataType: 'json',
+                                contentType: 'application/json',
+                                success: function(data) {
+                                    alert(data);
+                                    var data1 = "here you go";
+                                    $('#name').val(data1);
+
+                                    $.each(data, function(index, item) {
+                                        $('#id').val(item.id);
+                                        $('#name').val(item.name);
+                                        $('#address').val(item.address);
+                                        $('#issuedate').val(item.issuedate);
+                                        $('#deadline').val(item.deadlinedate);
+                                        $('#amount').val(item.amount);
+
+
+                                    });
+                                    // window.location.reload();
+                                    // $("#refrese").load(document.URL + " #refrese");
+                                    //getalldata();
+
+                                }
+                            });
+                        },
+                        close: function() {
+
+                        }
+                    });
+
+                });
+                 $("#dialogForm").on("click", "#addButton", function() {
+                     var id = $(this).attr('id');
+                    alert(id);
+                     $.ajax({
+                        type: 'PUT',
+                        url: 'rs/member/' + id + '',
+                        dataType: 'json',
+                        data: JSON.stringify({"id": $("#id").val(),
+                            "name": $("#name").val(),
+                            "address": $("#address").val(),
+                            "issuedate": $("#issuedate").val(),
+                            "deadlinedate": $("#deadline").val(),
+                             "amount": $("#amount").val()}),
+                        contentType: 'application/json',
+                        success: function(data) {
+                                
+                            // window.location.reload();
+                            // $("#refrese").load(document.URL + " #refrese");
+                            //getalldata();
+
+                          $("#delete"+id).add();
+
+                        }
+                    });
+                 });
+                
+            });
+
+        </script>
+
+        <style>
+
+            label, input { display:block; }
+            input.text { margin-bottom:12px; width:95%; padding: .4em; }
+            fieldset { padding:0; border:0; margin-top:25px; }
+            h1 { font-size: 1.2em; margin: .6em 0; }
+            .ui-dialog .ui-state-error { padding: .3em; }
+            .validateTips { border: 1px solid transparent; padding: 0.3em; }
+
+            body{
+                width: 800px;
+                margin-left: auto;
+                margin-right: auto;
+                margin-bottom:0;  
+                margin-top:0;
+
+                border-left: 2px solid black; 
+                border-right: 2px solid black;
+            }
+            header{
+                //border:2px solid black;
+            }
+            #list{
+                border-top: 2px solid black; 
+                border-bottom:  2px solid black;
+                list-style-type:none;
+
+                background-image :linear-gradient(to right, rgba(183,222,237,1) 0%, rgba(113,206,239,1) 50%, rgba(33,180,226,1) 51%, rgba(183,222,237,1) 100%);padding-top:1em;
+                padding-bottom:1em;
+            }
+            li{
+
+                padding-left: 1em;
+                display:inline;
+                margin-right: 0em;
+
+            }
+            li a{
+                color: black;
+                font-weight: bold;
+            }
+            h3 {
+
+                margin-left:0.5em; 
+            }
+            /*footer, decrease the size of the font*/
+            footer {
+                margin-top: 1em; 
+                border-bottom: 2px solid black; 
+                border-top: 2px solid black;
+                background-image: -moz-linear-gradient(45deg,black ,blue 75%,white 100%);
+                background-image :linear-gradient(to right, rgba(183,222,237,1) 0%, rgba(113,206,239,1) 50%, rgba(33,180,226,1) 51%, rgba(183,222,237,1) 100%);padding-top:1em;
+                background-color:#0040FF; 
+                margin-top: 170px;
+
+            }
+            footer p { font-size: 100%; text-align:center;font-weight: bold;}
+
+            #intro{
+                margin: 0.5em;
+            }
+            #table{
+                width: 800px;
+            }
+            #dialogForm{
+                display: none;
+
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <img src="images/DigitalLibrary_banner.jpg" width="800" height="150" alt="icon">
+            <nav>
+                <ul id="list">
+                    <li> <a href="welcome.html">Home</a></li>
+                    <li> <a href="MemberList.html">Members</a></li>
+                    <li> <a href="AddMember.html">Add Member</a></li>
+                    <li> <a href="BookList.html">Books List</a></li>
+                    <li><a href="AddBook.html">Add Books</a></li>
+                    <li> <a href="BorrowBook.html">Borrow Book</a></li>
+                    <li> <a href="ReturnBook.html">Return Book</a></li>
+                    <li>  <a href="Logout.html">Logout</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <div id="refrese">
+            <table border="1" id="table">
+                <tr>
+                    <th>Name</th>
+                    <th>Address Code</th>
+                    <th>Issue Date</th>
+                    <th>Due Date</th>
+                    <th>amount</th>
+                </tr>
+
+            </table>
+
+        </div> 
+        <div id="dialogForm" title="Update Book Details">
+            <p class="validateTips">All form fields are required.</p>
+
+            <form>
+
+                <fieldset>
+                    <label for="id">Id No.</label>
+                    <input type="text" name="id" id="id" class="id"/>
+                    <br>
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name" class="name"/>
+                    <br>
+                    <label for="address">Address</label>
+                    <input type="text" name="address" id="address" class="address"/>
+                    <br>
+                    <label for="issueDate">Date of Issue</label>
+                    <input type="text" name="issueDate" id="issuedate" class="issueDate"/>                    
+                    <br>
+                    <label for="deadLine" id="deadLine">Date of Deadline</label>
+                    <input type="text" name="deadLine" id="deadline" class="deadLine"/>
+                    <br>
+                    <label for="amount">Amount</label>
+                    <input type="text" name="amount" id="amount" class="amount"/><br>
+                    <input type="submit" value="Add" id="addButton" class="add">
+                </fieldset>
+            </form>
+        </div>
+        <footer>
+            <p> &copy; 2015 Kuldeep singh</p>
+        </footer>
+    </body>
+</html>
