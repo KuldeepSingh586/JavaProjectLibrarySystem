@@ -30,7 +30,7 @@ import javax.ws.rs.Produces;
  *
  * @author Kuldeep
  */
-@Path("member")
+@Path("/member")
 public class member {
 
     /**
@@ -45,6 +45,7 @@ public class member {
     public String doGet() {
 
         String result = resultMethod("SELECT * FROM members");
+      
         return result;
 
     }
@@ -67,7 +68,7 @@ public class member {
 
     /**
      * doPost Method takes one parameter of type String. Used to Insert the
-     * values into Product table. get the name, address, amount by using HashMap
+     * values into Member table. get the name, address, amount by using HashMap
      * call doUpdate Method
      *
      * @param strValue
@@ -110,7 +111,7 @@ public class member {
 
     /**
      * doPut Method takes two parameters of type string Used to Insert the
-     * values into Product table. get the name, address, amount by using HashMap
+     * values into Member table. get the name, address, amount by using HashMap
      *
      * @param id
      * @param strValue
@@ -150,7 +151,7 @@ public class member {
 
     /**
      * doDelete takes one parameter of type String. Used to delete the values
-     * into Product table. get the name, address, amount by using Simple Json
+     * into Member table. get the name, address, amount by using Simple Json
      * Library
      *
      * @param id
@@ -164,7 +165,7 @@ public class member {
     }
 
     /**
-     * resultMethod accepts two arguments It executes the Query get ProductID,
+     * resultMethod accepts two arguments It executes the Query get MemberID,
      * name, address, amount. Used JSON object model and provides methods to add
      * name/value pairs to the object model and to return the resulting object
      *
@@ -184,7 +185,7 @@ public class member {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 JsonObjectBuilder json = Json.createObjectBuilder()
-                        .add("member id", rs.getInt("id"))
+                        .add("id", rs.getInt("id"))
                         .add("name", rs.getString("name"))
                         .add("address", rs.getString("address"))
                         .add("issuedate", rs.getString("issuedate"))
