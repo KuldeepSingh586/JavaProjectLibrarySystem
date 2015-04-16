@@ -19,7 +19,6 @@ and open the template in the editor.
 
             $(document).ready(function() {
                 var i;
-
                 function getalldata() {
 
 
@@ -69,12 +68,9 @@ and open the template in the editor.
                             //getalldata();
 
                             $("#delete" + id).remove();
-
                         }
                     });
-
                 });
-
                 //call dialog box
 
                 $("#table").on("click", ".updateBook", function() {
@@ -96,7 +92,6 @@ and open the template in the editor.
                                     alert(data);
                                     var data1 = "here you go";
                                     $('#name').val(data1);
-
                                     $.each(data, function(index, item) {
                                         $('#id').val(item.id);
                                         $('#name').val(item.name);
@@ -104,8 +99,6 @@ and open the template in the editor.
                                         $('#issuedate').val(item.issuedate);
                                         $('#deadline').val(item.deadlinedate);
                                         $('#amount').val(item.amount);
-
-
                                     });
                                     // window.location.reload();
                                     // $("#refrese").load(document.URL + " #refrese");
@@ -118,34 +111,36 @@ and open the template in the editor.
 
                         }
                     });
-
                 });
-                 $("#dialogForm").on("click", "#addButton", function() {
-                     var id = $(this).attr('id');
+                $("#dialogForm").on("click", "#addButton", function() {
+                    var id = $("#id").val();
+
+
                     alert(id);
-                     $.ajax({
+                    $.ajax({
                         type: 'PUT',
                         url: 'rs/member/' + id + '',
                         dataType: 'json',
+                        contentType: 'application/json; charset=UTF-8',
                         data: JSON.stringify({"id": $("#id").val(),
                             "name": $("#name").val(),
                             "address": $("#address").val(),
                             "issuedate": $("#issuedate").val(),
                             "deadlinedate": $("#deadline").val(),
-                             "amount": $("#amount").val()}),
-                        contentType: 'application/json',
+                            "amount": $("#amount").val()}),
                         success: function(data) {
-                                
+
                             // window.location.reload();
                             // $("#refrese").load(document.URL + " #refrese");
                             //getalldata();
 
-                          $("#delete"+id).add();
 
                         }
                     });
-                 });
-                
+
+
+
+                });
             });
 
         </script>
@@ -230,8 +225,6 @@ and open the template in the editor.
                     <li> <a href="AddMember.html">Add Member</a></li>
                     <li> <a href="BookList.html">Books List</a></li>
                     <li><a href="AddBook.html">Add Books</a></li>
-                    <li> <a href="BorrowBook.html">Borrow Book</a></li>
-                    <li> <a href="ReturnBook.html">Return Book</a></li>
                     <li>  <a href="Logout.html">Logout</a></li>
                 </ul>
             </nav>
