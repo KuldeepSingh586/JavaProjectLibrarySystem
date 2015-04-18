@@ -6,7 +6,7 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Book List</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="http://code.jquery.com/jquery.min.js"></script>
@@ -22,8 +22,6 @@ and open the template in the editor.
                         success: function(data) {
                             console.log(data);
                             $.each(data, function(index, item) {
-
-                                //var data=item.name;
                                 $("#table").append("<tr id=delete" + item.id + "><td>" + item.name + "</td>"
                                         + "<td>" + item.bookcode + "</td>"
                                         + "<td>" + item.author + "</td>"
