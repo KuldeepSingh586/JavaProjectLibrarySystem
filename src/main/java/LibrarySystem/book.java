@@ -133,7 +133,7 @@ public class book {
                         .add("arrivaldate", rs.getString("arrivaldate"))
                         .add("quantity", rs.getInt("quantity"))
                         .add("location_rack", rs.getString("location_rack"))
-                        .add("id", rs.getString("id")).build();
+                        .add("id", rs.getInt("id")).build();
 
                 jsonArrayObj.add(json);
             }
