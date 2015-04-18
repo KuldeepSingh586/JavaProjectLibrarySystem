@@ -9,10 +9,6 @@
         <script>
             $(document).ready(function() {
                 $("#addMember").click(function () {
-                    alert("jh");
-                    var id = $("#id").val();
-
-                    alert(id);
                     $.ajax({
                         type: 'POST',
                         url: 'rs/member/',
@@ -25,10 +21,7 @@
                             "deadlinedate": $("#deadline").val(),
                             "amount": $("#amount").val()}),
                         success: function(data) {
-                             alert("POST done");
-                            // window.location.reload();
-                            // $("#refrese").load(document.URL + " #refrese");
-                            //getalldata();
+                          
                                location.href="http://localhost:8080/librarymanagementsystem/MemberList.html";
 
                         }
@@ -93,7 +86,9 @@
             #addMember{
                 
                 width:100px;
+                margin-left: 14em;
             }
+            
         </style>
     </head>
 
@@ -114,12 +109,12 @@
         <section>
             <div id="container">
                 <div id="content">
-                    <label for="deadLine" id="deadLine">Date of Deadline</label>
-                    <input type="text" name="deadLine" id ="deadLine" class="deadLine"/>
+                    <label for="deadLine">Date of Deadline</label>
+                    <input type="text" name="deadLine" id ="deadline" "/>
                     <br>
                     <label for="amount">Amount</label>
                     <input type="text" name="amount" id="amount" class="amount"/><br>
-                    <input type="button" value="Add" id="addMember"/>
+                    <input type="button" value="Add Member" id="addMember"/>
                 </div>
                 <div>
                     <label for="id">Id No.</label>
@@ -132,7 +127,7 @@
                     <input type="text" name="address" id="address" class="address"/>
                     <br>
                     <label for="issueDate">Date of Issue</label>
-                    <input type="text" name="issueDate" id ="issueDate" class="issueDate"/>
+                    <input type="text" name="issueDate" id ="issuedate" class="issueDate"/>
                     
                     
                     <br>
