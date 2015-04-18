@@ -38,16 +38,10 @@ and open the template in the editor.
                                         + "<td>" + item.issuedate + "</td>"
                                         + "<td>" + item.deadlinedate + "</td>"
                                         + "<td>" + item.amount + "</td>"
-                                        + "<td><input type='button' class='deleteBook' id=" + item.id + " value='Delete'>" + item.id + ""
-                                        + "<input type='button' class='updateBook' id=" + item.id + " value='Update'>" + item.id + "</td></tr>"
+                                        + "<br><td align='center'style= padding-top:1em;padding-bottom:1em;><input type='button' class='deleteBook' id=" + item.id + " value='Delete'><br>"
+                                        + "<input type='button' class='updateBook' id=" + item.id + " value='Update'></td></tr>"
                                         );
-                                /*   $("#bookcode").append("<td>" + item.bookcode + "</td>");
-                                 $("#author").append("<td>" + item.author+ "</td>");
-                                 $("#quantity").append("<td>" + item.quantity + "</td>");
-                                 $("#arrivaldate").append("<td>" + item.arrivaldate+ "</td>");
-                                 $("#location_rack").append("<td>" + item.location_rack + "</td></tr>");
-                                 $("#delete").append("<tr><td><input type='button' class='deleteBook' id="+item.id+" value='delete'>"+item.id+"</td></tr>");
-                                 */
+
                             });
                         }
                     });
@@ -112,11 +106,10 @@ and open the template in the editor.
                         }
                     });
                 });
-                $("#dialogForm").on("click", "#addButton", function() {
-                    var id = $("#id").val();
-
-
-                    alert(id);
+                $("#addButton").click(function() {
+                   // var id = $("#id").val();
+                  //  alert(id);
+                    alert("skdfhvsvs");
                     $.ajax({
                         type: 'PUT',
                         url: 'rs/member/' + id + '',
@@ -129,17 +122,12 @@ and open the template in the editor.
                             "deadlinedate": $("#deadline").val(),
                             "amount": $("#amount").val()}),
                         success: function(data) {
-
                             // window.location.reload();
                             // $("#refrese").load(document.URL + " #refrese");
                             //getalldata();
-
-
+                            
                         }
                     });
-
-
-
                 });
             });
 
@@ -179,7 +167,8 @@ and open the template in the editor.
 
                 padding-left: 1em;
                 display:inline;
-                margin-right: 0em;
+                margin-left:2em;
+                text-align: center;
 
             }
             li a{
@@ -238,6 +227,7 @@ and open the template in the editor.
                     <th>Issue Date</th>
                     <th>Due Date</th>
                     <th>amount</th>
+                    <th>Perform Operation</th>
                 </tr>
 
             </table>
@@ -266,7 +256,8 @@ and open the template in the editor.
                     <br>
                     <label for="amount">Amount</label>
                     <input type="text" name="amount" id="amount" class="amount"/><br>
-                    <input type="submit" value="Add" id="addButton" class="add">
+                    <input type="button" value="Add" id="addButton"/>
+                    
                 </fieldset>
             </form>
         </div>
