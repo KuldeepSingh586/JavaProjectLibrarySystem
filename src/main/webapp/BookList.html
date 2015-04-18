@@ -10,6 +10,10 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="http://code.jquery.com/jquery.min.js"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
         <script>
 
             $(document).ready(function() {
@@ -28,7 +32,8 @@ and open the template in the editor.
                                         + "<td>" + item.quantity + "</td>"
                                         + "<td>" + item.arrivaldate + "</td>"
                                         + "<td>" + item.location_rack + "</td>"
-                                        + "<td><input type='button' class='deleteBook' id=" + item.id + " value='delete'>" + item.id + "</td></tr>"
+                                        + "<td><input type='button' class='deleteBook' id=" + item.id + " value='delete'></input>"
+                                        + "<input type='button' class='updateBook' id=" + item.id + " value='Update'></td></tr>"
                                         );
 
                             });
@@ -38,20 +43,12 @@ and open the template in the editor.
                 getalldata();
                 $("#table").on("click", ".deleteBook", function() {
                     var id = $(this).attr('id');
-
-
-
                     $.ajax({
                         type: 'DELETE',
                         url: 'rs/book/' + id + '',
                         dataType: 'json',
                         contentType: 'application/json',
                         success: function(data) {
-
-                            // window.location.reload();
-                            // $("#refrese").load(document.URL + " #refrese");
-                            //getalldata();
-
                             $("#delete" + id).remove();
 
                         }
@@ -60,6 +57,70 @@ and open the template in the editor.
                 });
 
 
+
+                //call dialog box
+
+                $("#table").on("click", ".updateBook", function() {
+                    alert("update button pressed");
+                    var id = $(this).attr('id');
+                    alert(id);
+                    $("#dialogForm").dialog({
+                        autoOpen: true,
+                        height: 610,
+                        width: 350,
+                        modal: true,
+                        show: 'slide',
+                        open: function() {
+                            $.ajax({
+                                type: 'GET',
+                                url: 'rs/book/' + id,
+                                dataType: 'json',
+                                contentType: 'application/json',
+                                success: function(data) {
+                                    alert(data);
+                                    $.each(data, function(index, item) {
+                                        $('#id').val(item.id);
+                                        $('#name').val(item.name);
+                                        $('#bookcode').val(item.bookcode);
+                                        $('#author').val(item.author);
+                                        $('#arrivaldate').val(item.arrivaldate);
+                                        $('#quantity').val(item.quantity);
+                                        $('#location_rack').val(item.location_rack);
+                                    });
+
+                                }
+                            });
+                        },
+                        close: function() {
+
+                        }
+                    });
+                });
+                $("#addButton").click(function() {
+                    alert("Add Button Pressed");
+                     var id = $("#id").val();
+                    alert("button id : " + id);
+                    $.ajax({
+                        type: 'PUT',
+                        url: 'rs/book/' + id,
+                        dataType: 'json',
+                        contentType: 'application/json; charset=UTF-8',
+                        data: JSON.stringify({
+                            "name": $("#name").val(),
+                            "bookcode": $("#bookcode").val(),
+                            "author": $("#author").val(),
+                            "quantity": $("#quantity").val(),
+                            "arrivaldate": $("#arrivaldate").val(),
+                            "location_rack": $("#location_rack").val()}),
+                        success: function(data) {
+                            alert("Update done");
+                         //    $(this).dialog("close");
+                              $('#dialogForm').dialog('close');
+                              $("#table").load(location.href + " #table");
+                               getalldata();
+                        }
+                    });
+                });
             });
         </script>
         <style>
@@ -89,6 +150,8 @@ and open the template in the editor.
                 padding-left: 1em;
                 display:inline;
                 margin-right: 0em;
+                margin-left:2em;
+                text-align: center;
 
             }
             li a{
@@ -107,13 +170,116 @@ and open the template in the editor.
                 background-image: -moz-linear-gradient(45deg,black ,blue 75%,white 100%);
                 background-image :linear-gradient(to right, rgba(183,222,237,1) 0%, rgba(113,206,239,1) 50%, rgba(33,180,226,1) 51%, rgba(183,222,237,1) 100%);padding-top:1em;
                 background-color:#0040FF; 
-                margin-top: 245px;
+
 
             }
             footer p { font-size: 100%; text-align:center;font-weight: bold;}
 
             #intro{
                 margin: 0.5em;
+            }
+
+            #refrese {
+                margin:0px;padding:0px;
+                width:100%;
+                box-shadow: 10px 10px 5px #888888;
+                border:1px solid #000000;
+
+                -moz-border-radius-bottomleft:14px;
+                -webkit-border-bottom-left-radius:14px;
+                border-bottom-left-radius:14px;
+
+                -moz-border-radius-bottomright:14px;
+                -webkit-border-bottom-right-radius:14px;
+                border-bottom-right-radius:14px;
+
+                -moz-border-radius-topright:14px;
+                -webkit-border-top-right-radius:14px;
+                border-top-right-radius:14px;
+
+                -moz-border-radius-topleft:14px;
+                -webkit-border-top-left-radius:14px;
+                border-top-left-radius:14px;
+            } 
+            table{
+                border-collapse: collapse;
+                border-spacing: 0;
+                width:100%;
+                height:100%;
+                margin:0px;padding:0px;
+            } tr:last-child td:last-child {
+                -moz-border-radius-bottomright:14px;
+                -webkit-border-bottom-right-radius:14px;
+                border-bottom-right-radius:14px;
+            }
+            table tr:first-child td:first-child {
+                -moz-border-radius-topleft:14px;
+                -webkit-border-top-left-radius:14px;
+                border-top-left-radius:14px;
+            }
+            table tr:first-child td:last-child {
+                -moz-border-radius-topright:14px;
+                -webkit-border-top-right-radius:14px;
+                border-top-right-radius:14px;
+            } tr:last-child td:first-child{
+                -moz-border-radius-bottomleft:14px;
+                -webkit-border-bottom-left-radius:14px;
+                border-bottom-left-radius:14px;
+            } tr:hover td{
+                background-color:#ffaaaa;
+
+            }
+            td{
+                vertical-align:middle;
+
+                background-color:#ffffff;
+
+                border:1px solid #000000;
+                border-width:0px 1px 1px 0px;
+                text-align:left;
+                padding:7px;
+                font-size:20px;
+                font-family:Arial;
+                font-weight:normal;
+                color:#000000;
+            }
+            tr:last-child td{
+                border-width:0px 1px 0px 0px;
+            } tr td:last-child{
+                border-width:0px 0px 1px 0px;
+            } tr:last-child td:last-child{
+                border-width:0px 0px 0px 0px;
+            }
+            tr:first-child td{
+                background:-o-linear-gradient(bottom, #ff5656 5%, #7f0000 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ff5656), color-stop(1, #7f0000) );
+                background:-moz-linear-gradient( center top, #ff5656 5%, #7f0000 100% );
+                filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#ff5656", endColorstr="#7f0000");	background: -o-linear-gradient(top,#ff5656,7f0000);
+
+                background-color:#ff5656;
+                border:0px solid #000000;
+                text-align:center;
+                border-width:0px 0px 1px 1px;
+                font-size:14px;
+                font-family:Arial;
+                font-weight:bold;
+                color:#ffffff;
+            }
+            tr:first-child:hover td{
+                background:-o-linear-gradient(bottom, #ff5656 5%, #7f0000 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ff5656), color-stop(1, #7f0000) );
+                background:-moz-linear-gradient( center top, #ff5656 5%, #7f0000 100% );
+                filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#ff5656", endColorstr="#7f0000");	background: -o-linear-gradient(top,#ff5656,7f0000);
+
+                background-color:#ff5656;
+            }
+            tr:first-child td:first-child{
+                border-width:0px 0px 1px 0px;
+            }
+            tr:first-child td:last-child{
+                border-width:0px 0px 1px 1px;
+            }
+            #dialogForm{
+                display: none;
+
             }
         </style>
     </head>
@@ -127,27 +293,55 @@ and open the template in the editor.
                     <li> <a href="AddMember.html">Add Member</a></li>
                     <li> <a href="BookList.html">Books List</a></li>
                     <li><a href="AddBook.html">Add Books</a></li>
-                    <li> <a href="BorrowBook.html">Borrow Book</a></li>
-                    <li> <a href="ReturnBook.html">Return Book</a></li>
-                    <li>  <a href="Logout.html">Logout</a></li>
+                    <li>  <a href="LogoutServlet">Logout</a></li>
                 </ul>
             </nav>
         </header>
         <div id="refrese">
             <table border="1" id="table">
                 <tr>
-                    <th>Name</th>
-                    <th>Book Code</th>
-                    <th>Author</th>
-                    <th>Arrival Date</th>
-                    <th>Quantity</th>
-                    <th>Location</th>
+                    <td>Name</td>
+                    <td>Book Code</td>
+                    <td>Author</td>
+                    <td>Quantity</td>
+                    <td>Arrival Date</td>
+
+                    <td>Location</td>
+                    <td>Operation</td>
                 </tr>
             </table>
+        </div> 
+        <div id="dialogForm" title="Update Book Details">
+            <p class="validateTips">All form fields are required.</p>
 
-        </div>  
+            <fieldset>
+                <label for="id">Id No.</label>
+                <input type="text" name="id" id="id" class="id"/>
+                <br>
+                <label for="id">Name</label>
+                <input type="text" name="id" id="name" class="name"/>
+                <br>
+                <label for="bookcode">Book Code</label>
+                <input type="text" name="bookcode" id="bookcode" class="bookcode"/>
+                <br>
+                <label for="author">Author</label>
+                <input type="text" name="author" id="author" class="author"/>
+                <br>
+                <label for="arrivaldate">Arrival Date</label>
+                <input type="text" name="arrivaldate" id="arrivaldate" class="arrivaldate"/>                    
+                <br>
+                <label for="deadLine">Quantity</label>
+                <input type="text" name="quantity" id="quantity" class="quantity"/>
+                <br>
+                <label for="location_rack">Location Rack</label>
+                <input type="text" name="location_rack" id="location_rack" class="location_rack"/><br>
+                <input type="button" value="Add" id="addButton"/>
+
+            </fieldset>
+
+        </div>
         <footer>
-            <p> &copy; 2015 Kuldeep singh</p>
+            <p> &copy; 2015 Kuldeep Singh</p>
         </footer>
     </body>
 </html>

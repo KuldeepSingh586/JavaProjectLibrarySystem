@@ -17,6 +17,10 @@
         <servlet-name>ShowSession</servlet-name>
         <servlet-class>Servlets.ShowSession</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>Servlets.LogoutServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -32,6 +36,10 @@
     <servlet-mapping>
         <servlet-name>ShowSession</servlet-name>
         <url-pattern>/ShowSession</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/LogoutServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>15</session-timeout>
