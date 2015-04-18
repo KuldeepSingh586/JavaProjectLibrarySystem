@@ -18,7 +18,6 @@ and open the template in the editor.
         <script>
 
             $(document).ready(function() {
-                var i;
                 function getalldata() {
                     $.ajax({
                         type: 'GET',
@@ -26,11 +25,8 @@ and open the template in the editor.
                         dataType: 'json',
                         contentType: 'application/json',
                         success: function(data) {
-
                             console.log(data);
                             $.each(data, function(index, item) {
-
-                                //var data=item.name;
                                 $("#table").append("<tr id=delete" + item.id + "><td>" + item.name + "</td>"
                                         + "<td>" + item.address + "</td>"
                                         + "<td>" + item.issuedate + "</td>"
@@ -39,7 +35,6 @@ and open the template in the editor.
                                         + "<br><td align='center'style= padding-top:1em;padding-bottom:1em;><input type='button' class='deleteBook' id=" + item.id + " value='Delete'><br>"
                                         + "<input type='button' class='updateBook' id=" + item.id + " value='Update'></td></tr>"
                                         );
-
                             });
                         }
                     });
@@ -47,7 +42,6 @@ and open the template in the editor.
                 getalldata();
                 $("#table").on("click", ".deleteBook", function() {
                     var id = $(this).attr('id');
-                    alert(id);
                     $.ajax({
                         type: 'DELETE',
                         url: 'rs/member/' + id + '',
@@ -62,7 +56,7 @@ and open the template in the editor.
                 //call dialog box
 
                 $("#table").on("click", ".updateBook", function() {
-                    alert("g jfn");
+                    
                     var id = $(this).attr('id');
                     $("#dialogForm").dialog({
                         autoOpen: true,
@@ -77,8 +71,7 @@ and open the template in the editor.
                                 dataType: 'json',
                                 contentType: 'application/json',
                                 success: function(data) {
-                                    alert(data);
-
+                                 
                                     $.each(data, function(index, item) {
                                         $('#id').val(item.id);
                                         $('#name').val(item.name);
@@ -110,7 +103,7 @@ and open the template in the editor.
                             "deadlinedate": $("#deadline").val(),
                             "amount": $("#amount").val()}),
                         success: function(data) {
-                            alert("updated");
+                          
                             $('#dialogForm').dialog('close');
                             $("#table").load(location.href + " #table");
                             getalldata();
