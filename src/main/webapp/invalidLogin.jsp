@@ -40,7 +40,7 @@
         <div id="dialog-message" title="Invalid User" >
             <p>
                 <span class="ui-icon ui-icon-circle-check" style="float:left; margin:0 7px 50px 0;"></span>
-                Sorry, you are not a registered user!
+                You are not a registered user!
             </p>
             <p>
 
