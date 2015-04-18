@@ -20,8 +20,6 @@ and open the template in the editor.
             $(document).ready(function() {
                 var i;
                 function getalldata() {
-
-
                     $.ajax({
                         type: 'GET',
                         url: 'rs/member',
@@ -57,10 +55,6 @@ and open the template in the editor.
                         contentType: 'application/json',
                         success: function(data) {
 
-                            // window.location.reload();
-                            // $("#refrese").load(document.URL + " #refrese");
-                            //getalldata();
-
                             $("#delete" + id).remove();
                         }
                     });
@@ -84,8 +78,7 @@ and open the template in the editor.
                                 contentType: 'application/json',
                                 success: function(data) {
                                     alert(data);
-                                    var data1 = "here you go";
-                                    $('#name').val(data1);
+
                                     $.each(data, function(index, item) {
                                         $('#id').val(item.id);
                                         $('#name').val(item.name);
@@ -94,9 +87,6 @@ and open the template in the editor.
                                         $('#deadline').val(item.deadlinedate);
                                         $('#amount').val(item.amount);
                                     });
-                                    // window.location.reload();
-                                    // $("#refrese").load(document.URL + " #refrese");
-                                    //getalldata();
 
                                 }
                             });
@@ -107,12 +97,10 @@ and open the template in the editor.
                     });
                 });
                 $("#addButton").click(function() {
-                   // var id = $("#id").val();
-                  //  alert(id);
-                    alert("skdfhvsvs");
+                      var id = $("#id").val();
                     $.ajax({
                         type: 'PUT',
-                        url: 'rs/member/' + id + '',
+                        url: 'rs/member/'+id,
                         dataType: 'json',
                         contentType: 'application/json; charset=UTF-8',
                         data: JSON.stringify({"id": $("#id").val(),
@@ -122,10 +110,10 @@ and open the template in the editor.
                             "deadlinedate": $("#deadline").val(),
                             "amount": $("#amount").val()}),
                         success: function(data) {
-                            // window.location.reload();
-                            // $("#refrese").load(document.URL + " #refrese");
-                            //getalldata();
-                            
+                            alert("updated");
+                            $('#dialogForm').dialog('close');
+                            $("#table").load(location.href + " #table");
+                            getalldata();
                         }
                     });
                 });
@@ -202,6 +190,104 @@ and open the template in the editor.
                 display: none;
 
             }
+            #refrese {
+                margin:0px;padding:0px;
+                width:100%;
+                box-shadow: 10px 10px 5px #888888;
+                border:1px solid #000000;
+
+                -moz-border-radius-bottomleft:14px;
+                -webkit-border-bottom-left-radius:14px;
+                border-bottom-left-radius:14px;
+
+                -moz-border-radius-bottomright:14px;
+                -webkit-border-bottom-right-radius:14px;
+                border-bottom-right-radius:14px;
+
+                -moz-border-radius-topright:14px;
+                -webkit-border-top-right-radius:14px;
+                border-top-right-radius:14px;
+
+                -moz-border-radius-topleft:14px;
+                -webkit-border-top-left-radius:14px;
+                border-top-left-radius:14px;
+            } 
+            table{
+                border-collapse: collapse;
+                border-spacing: 0;
+                width:100%;
+                height:100%;
+                margin:0px;padding:0px;
+            } tr:last-child td:last-child {
+                -moz-border-radius-bottomright:14px;
+                -webkit-border-bottom-right-radius:14px;
+                border-bottom-right-radius:14px;
+            }
+            table tr:first-child td:first-child {
+                -moz-border-radius-topleft:14px;
+                -webkit-border-top-left-radius:14px;
+                border-top-left-radius:14px;
+            }
+            table tr:first-child td:last-child {
+                -moz-border-radius-topright:14px;
+                -webkit-border-top-right-radius:14px;
+                border-top-right-radius:14px;
+            } tr:last-child td:first-child{
+                -moz-border-radius-bottomleft:14px;
+                -webkit-border-bottom-left-radius:14px;
+                border-bottom-left-radius:14px;
+            } tr:hover td{
+                background-color:#ffaaaa;
+
+            }
+            td{
+                vertical-align:middle;
+
+                background-color:#ffffff;
+
+                border:1px solid #000000;
+                border-width:0px 1px 1px 0px;
+                text-align:left;
+                padding:7px;
+                font-size:20px;
+                font-family:Arial;
+                font-weight:normal;
+                color:#000000;
+            }
+            tr:last-child td{
+                border-width:0px 1px 0px 0px;
+            } tr td:last-child{
+                border-width:0px 0px 1px 0px;
+            } tr:last-child td:last-child{
+                border-width:0px 0px 0px 0px;
+            }
+            tr:first-child td{
+                background:-o-linear-gradient(bottom, #ff5656 5%, #7f0000 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ff5656), color-stop(1, #7f0000) );
+                background:-moz-linear-gradient( center top, #ff5656 5%, #7f0000 100% );
+                filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#ff5656", endColorstr="#7f0000");	background: -o-linear-gradient(top,#ff5656,7f0000);
+
+                background-color:#ff5656;
+                border:0px solid #000000;
+                text-align:center;
+                border-width:0px 0px 1px 1px;
+                font-size:14px;
+                font-family:Arial;
+                font-weight:bold;
+                color:#ffffff;
+            }
+            tr:first-child:hover td{
+                background:-o-linear-gradient(bottom, #ff5656 5%, #7f0000 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ff5656), color-stop(1, #7f0000) );
+                background:-moz-linear-gradient( center top, #ff5656 5%, #7f0000 100% );
+                filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#ff5656", endColorstr="#7f0000");	background: -o-linear-gradient(top,#ff5656,7f0000);
+
+                background-color:#ff5656;
+            }
+            tr:first-child td:first-child{
+                border-width:0px 0px 1px 0px;
+            }
+            tr:first-child td:last-child{
+                border-width:0px 0px 1px 1px;
+            }
         </style>
     </head>
     <body>
@@ -222,18 +308,18 @@ and open the template in the editor.
         <div id="refrese">
             <table border="1" id="table">
                 <tr>
-                    <th>Name</th>
-                    <th>Address Code</th>
-                    <th>Issue Date</th>
-                    <th>Due Date</th>
-                    <th>amount</th>
-                    <th>Perform Operation</th>
+                    <td>Name</td>
+                    <td>Address Code</td>
+                    <td>Issue Date</td>
+                    <td>Due Date</td>
+                    <td>amount</td>
+                    <td>Perform Operation</td>
                 </tr>
 
             </table>
 
         </div> 
-        <div id="dialogForm" title="Update Book Details">
+        <div id="dialogForm" title="Update Member Details">
             <p class="validateTips">All form fields are required.</p>
 
             <form>
@@ -251,13 +337,13 @@ and open the template in the editor.
                     <label for="issueDate">Date of Issue</label>
                     <input type="text" name="issueDate" id="issuedate" class="issueDate"/>                    
                     <br>
-                    <label for="deadLine" id="deadLine">Date of Deadline</label>
+                    <label for="deadLine">Date of Deadline</label>
                     <input type="text" name="deadLine" id="deadline" class="deadLine"/>
                     <br>
                     <label for="amount">Amount</label>
                     <input type="text" name="amount" id="amount" class="amount"/><br>
                     <input type="button" value="Add" id="addButton"/>
-                    
+
                 </fieldset>
             </form>
         </div>
