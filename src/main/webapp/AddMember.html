@@ -4,11 +4,13 @@
         <meta charset="utf-8">
         <title>Library Management System</title>
         <link rel="stylesheet" href="member.css">
-          <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+         <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+        
         <script>
             $(document).ready(function() {
-                $("#addMember").click(function () {
+                $("#addMember").click(function() {
                     $.ajax({
                         type: 'POST',
                         url: 'rs/member/',
@@ -21,14 +23,16 @@
                             "deadlinedate": $("#deadline").val(),
                             "amount": $("#amount").val()}),
                         success: function(data) {
-                          
-                               location.href="http://localhost:8080/librarymanagementsystem/MemberList.html";
+
+                            location.href = "http://localhost:8080/librarymanagementsystem/MemberList.html";
 
                         }
                     });
 
                 });
             });
+
+           
         </script>
         <style>
             body{
@@ -84,11 +88,11 @@
                 margin: 0.5em;
             }
             #addMember{
-                
+
                 width:100px;
                 margin-left: 14em;
             }
-            
+
         </style>
     </head>
 
@@ -128,8 +132,8 @@
                     <br>
                     <label for="issueDate">Date of Issue</label>
                     <input type="text" name="issueDate" id ="issuedate" class="issueDate"/>
-                    
-                    
+
+
                     <br>
                 </div>
             </div>
