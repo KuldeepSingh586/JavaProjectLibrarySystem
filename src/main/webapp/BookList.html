@@ -13,18 +13,13 @@ and open the template in the editor.
         <script>
 
             $(document).ready(function() {
-                var i;
-
                 function getalldata() {
-
-
                     $.ajax({
                         type: 'GET',
                         url: 'rs/book/list',
                         dataType: 'json',
                         contentType: 'application/json',
                         success: function(data) {
-
                             console.log(data);
                             $.each(data, function(index, item) {
 
@@ -37,13 +32,7 @@ and open the template in the editor.
                                         + "<td>" + item.location_rack + "</td>"
                                         + "<td><input type='button' class='deleteBook' id=" + item.id + " value='delete'>" + item.id + "</td></tr>"
                                         );
-                                /*   $("#bookcode").append("<td>" + item.bookcode + "</td>");
-                                 $("#author").append("<td>" + item.author+ "</td>");
-                                 $("#quantity").append("<td>" + item.quantity + "</td>");
-                                 $("#arrivaldate").append("<td>" + item.arrivaldate+ "</td>");
-                                 $("#location_rack").append("<td>" + item.location_rack + "</td></tr>");
-                                 $("#delete").append("<tr><td><input type='button' class='deleteBook' id="+item.id+" value='delete'>"+item.id+"</td></tr>");
-                                 */
+
                             });
                         }
                     });
@@ -93,12 +82,12 @@ and open the template in the editor.
                 border-top: 2px solid black; 
                 border-bottom:  2px solid black;
                 list-style-type:none;
-                
+
                 background-image :linear-gradient(to right, rgba(183,222,237,1) 0%, rgba(113,206,239,1) 50%, rgba(33,180,226,1) 51%, rgba(183,222,237,1) 100%);padding-top:1em;
                 padding-bottom:1em;
             }
             li{
-               
+
                 padding-left: 1em;
                 display:inline;
                 margin-right: 0em;
@@ -109,7 +98,7 @@ and open the template in the editor.
                 font-weight: bold;
             }
             h3 {
-             
+
                 margin-left:0.5em; 
             }
             /*footer, decrease the size of the font*/
@@ -118,20 +107,20 @@ and open the template in the editor.
                 border-bottom: 2px solid black; 
                 border-top: 2px solid black;
                 background-image: -moz-linear-gradient(45deg,black ,blue 75%,white 100%);
-               background-image :linear-gradient(to right, rgba(183,222,237,1) 0%, rgba(113,206,239,1) 50%, rgba(33,180,226,1) 51%, rgba(183,222,237,1) 100%);padding-top:1em;
-                 background-color:#0040FF; 
-                 margin-top: 245px;
-                
+                background-image :linear-gradient(to right, rgba(183,222,237,1) 0%, rgba(113,206,239,1) 50%, rgba(33,180,226,1) 51%, rgba(183,222,237,1) 100%);padding-top:1em;
+                background-color:#0040FF; 
+                margin-top: 245px;
+
             }
             footer p { font-size: 100%; text-align:center;font-weight: bold;}
-            
+
             #intro{
                 margin: 0.5em;
             }
         </style>
     </head>
     <body>
-       <header>
+        <header>
             <img src="images/DigitalLibrary_banner.jpg" width="800" height="150" alt="icon">
             <nav>
                 <ul id="list">
