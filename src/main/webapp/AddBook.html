@@ -12,10 +12,10 @@ and open the template in the editor.
         <link rel="stylesheet" href="addbook.css">
            <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
         <script>
+            //to check whether field is blank or not
             
             $(document).ready(function() {
                 $("#addBook").click(function() {
-                    alert("Button Pressed");
                     if($("#name").val()==="" ||$("#bookcode").val()==="" || $("#author").val()==="" ||
                             $("#arrivaldate").val()==="" ||$("#location_rack").val()==="" ) {
                         alert("All fields are required");
@@ -34,10 +34,7 @@ and open the template in the editor.
                             "quantity": $("#quantity").val(),
                             "location_rack": $("#location_rack").val()}),
                         success: function(data) {
-                            alert("POST done");
-                            // window.location.reload();
-                            // $("#refrese").load(document.URL + " #refrese");
-                            //getalldata();
+                            
                             location.href = "http://localhost:8080/librarymanagementsystem/BookList.html";
 
                         }

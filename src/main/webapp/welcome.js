@@ -36,4 +36,26 @@ var num=0;
 });  
 
 
-
+<html><head>"
+                    + "<script src=\"https://code.jquery.com/jquery-1.10.2.js\"></script>\n"
+                    + "        <script src=\"https://code.jquery.com/ui/1.11.4/jquery-ui.js\"></script>\n"
+                    + "        <link rel=\"stylesheet\" href=\"//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css\">"
+                    + " <script>$(function() {\n"
+                    + "        $(\"#dialog-message\").effect(\"shake\", {times: 4}, 1000);\n"
+                    + "        $(\"#dialog-message\").dialog({\n"
+                    + "            modal: true,\n"
+                    + "            width: 500,\n"
+                    + "            buttons: {\n"
+                    + "                Back: function() {\n"
+                    + "                    window.location.replace('login.jsp');\n"
+                    + "                }\n"
+                    + "\n"
+                    + "            }\n"
+                    + "        });\n"
+                    + "    });</script>"
+                    + "</head>"
+                    + "<body>"
+                    + "<div id=\"dialog-message\" title=\"Status\">\n"
+                    + "    \n"
+                    + "    <p>You are successfully logged out!<p>\n"
+                    + "    </div></body></html>");
